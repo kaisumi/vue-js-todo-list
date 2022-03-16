@@ -8,7 +8,7 @@ app.component('todo-display', {
   /*html*/
   `<div class="todo-display">
     <todo-form @todo-submitted="addTodoItem"></todo-form>
-    <todo-list v-if="todo_items.length" :todo_items="todo_items"></todo-list>
+    <todo-list :todo_items="todo_items"></todo-list>
   </div>`,
   methods: {
     addTodoItem(todo) {

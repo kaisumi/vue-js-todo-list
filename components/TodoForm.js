@@ -7,6 +7,7 @@ app.component('todo-form', {
   </form>`,
   data() {
     return {
+      key_index: '',
       checked: false,
       content: ''
     }
@@ -15,11 +16,19 @@ app.component('todo-form', {
     onSubmit() {
       if (this.content === '') return
 
-      let todoItem = {
+      const storage_index = localStorage.getItem('todo_index')
+      let index = 0
+      if (!isNaN(parseInt(storage_index))) index = parseInt(storage_index)
+      let todo_item = {
+        key_index: index + 1,
         checked: this.checked,
         content: this.content
       }
-      this.$emit('todo-submitted', todoItem)
+      localStorage.setItem('todo_index', todo_item.key_index)
+      localStorage.setItem(`checked${todo_item.key_index}`, this.checked)
+      localStorage.setItem(`content${todo_item.key_index}`, this.content)
+      this.$emit('todo-submitted', todo_item)
+      console.log(`index: ${localStorage.getItem('todo_index')}, ${localStorage.getItem(`content${todo_item.key_index}`)}`)
 
       this.checked = false
       this.content = ''
