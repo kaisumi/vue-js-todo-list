@@ -5,9 +5,14 @@
 </head>
 <body>
   <h1>ToDo List</h1>
-  <div>
-    <input type="checkbox">
-    <input type="text">
-    <input type="button" value="x">
+  <div id="app">
+    <todo-display></todo-display>
   </div>
+  <script src="./main.js"></script>
+  <script src="./components/TodoDisplay.js"></script>
+  <script src="./components/TodoForm.js"></script>
+  <script src="./components/TodoList.js"></script>
+  <script>
+    const mountedApp = app.mount('#app')
+  </script>
 </body>
