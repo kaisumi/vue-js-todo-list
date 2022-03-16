@@ -12,8 +12,13 @@ app.component('todo-list', {
       <li v-for="(todo_item, index) in todo_items" :key="index">
         <input type="checkbox" :value="todo_item.checked">
         <input type="text" :value="todo_item.content">
-        <input type="button" value="x">
+        <input type="button" value="x" v-on:click="deleteItem(index)">
       </li>
     </ul>
-  </div>`
+  </div>`,
+  methods: {
+    deleteItem(index) {
+      this.todo_items.splice(index, 1)
+    }
+  }
 })
