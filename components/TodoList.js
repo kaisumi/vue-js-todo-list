@@ -25,7 +25,7 @@ app.component('todo-list', {
       }
       const count = parseInt(localStorage.getItem('todo_index'))
       for (let k = 0; k < count; k++) {
-        data_array.push(data_object)
+        data_array.push(Object.assign({}, data_object))
       }
       let count_effectives = 0
       let i
