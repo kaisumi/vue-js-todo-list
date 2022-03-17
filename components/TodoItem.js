@@ -21,6 +21,8 @@ app.component('todo-item', {
   methods: {
     deleteItem() {
       this.todo_items.splice(this.index, 1)
+      localStorage.removeItem(`content${this.todo_item.key_index}`)
+      localStorage.removeItem(`checked${this.todo_item.key_index}`)
     }
   }
 })
