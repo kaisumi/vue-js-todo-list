@@ -28,7 +28,6 @@ app.component('todo-form', {
       localStorage.setItem(`checked${todo_item.key_index}`, this.checked)
       localStorage.setItem(`content${todo_item.key_index}`, this.content)
       this.$emit('todo-submitted', todo_item)
-      console.log(`index: ${todo_item.key_index}, ${localStorage.getItem(`content${todo_item.key_index}`)}`)
 
       this.checked = false
       this.content = ''

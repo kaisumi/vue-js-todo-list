@@ -37,16 +37,13 @@ app.component('todo-list', {
             j = parseInt(keys[i].replace(/content(\d+)/, '$1'))
             data_array[j].content = localStorage.getItem(`content${j}`)
             data_array[j].key_index = j
-            // console.log(`j: ${j}, content: ${data_array[j].content}`)
             break
           case /checked(\d+)/.test(keys[i]):
             j = parseInt(keys[i].replace(/checked(\d+)/, '$1'))
             data_array[j].checked = (localStorage.getItem(`checked${j}`) === 'true')
-            console.log(`j: ${j}, checked: ${data_array[j].checked}`)
             break
         }
       }
-      // for(i = 0; i < data_array.length; i++) console.log(data_array[i].content)
       if (count_effectives > this.todo_items.length) {
         for (i = 0; i < data_array.length; i++) {
           if (data_array[i].content !== '') this.todo_items.push(data_array[i])

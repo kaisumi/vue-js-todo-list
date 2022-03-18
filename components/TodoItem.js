@@ -30,7 +30,6 @@ app.component('todo-item', {
       localStorage.removeItem(`checked${this.todo_item.key_index}`)
     },
     changeContent() {
-      console.log(this.todo_item.content)
       localStorage.setItem(`content${this.todo_item.key_index}`, this.todo_item.content)
     }
   }
