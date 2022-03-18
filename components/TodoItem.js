@@ -22,7 +22,6 @@ app.component('todo-item', {
   >
   <input
     type="text"
-    :value="this.todo_item.content"
     v-model="this.todo_item.content"
     @change="changeContent"
   >
