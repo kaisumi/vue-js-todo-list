@@ -9,8 +9,15 @@ app.component('todo-list', {
   /*html*/
   `<div class="todo-item-container">
     <ul v-if="onLoad()">
-      <li v-for="(todo_item, index) in todo_items" :key="index">
-        <todo-item :todo_items="this.todo_items" :todo_item="todo_item" :index="index"></todo-item>
+      <li
+        v-for="(todo_item, index) in todo_items"
+        :key="index"
+      >
+        <todo-item
+          :todo_items="this.todo_items"
+          :todo_item="todo_item"
+          :index="index"
+        ></todo-item>
       </li>
     </ul>
   </div>`,

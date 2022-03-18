@@ -1,9 +1,20 @@
 app.component('todo-form', {
   template:
   /*html*/
-  `<form class="todo-form" @submit.prevent="onSubmit">
-    <input id="checked" type="checkbox" v-model="checked">
-    <input id="content" type="text" v-model="content">
+  `<form
+    class="todo-form"
+    @submit.prevent="onSubmit"
+  >
+    <input
+      id="checked"
+      type="checkbox"
+      v-model="checked"
+    >
+    <input
+      id="content"
+      type="text"
+      v-model="content"
+    >
   </form>`,
   data() {
     return {

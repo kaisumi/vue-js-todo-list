@@ -15,9 +15,22 @@ app.component('todo-item', {
   },
   template:
   /*html*/
-  `<input type="checkbox" :checked="this.todo_item.checked" @change="clickCheckbox">
-  <input type="text" :value="this.todo_item.content" v-model="this.todo_item.content" @change="changeContent">
-  <input type="button" value="x" v-on:click="deleteItem">`,
+  `<input
+    type="checkbox"
+    :checked="this.todo_item.checked"
+    @change="clickCheckbox"
+  >
+  <input
+    type="text"
+    :value="this.todo_item.content"
+    v-model="this.todo_item.content"
+    @change="changeContent"
+  >
+  <input
+    type="button"
+    value="x"
+    @click="deleteItem"
+  >`,
   methods: {
     clickCheckbox(){
       this.todo_item.checked = !this.todo_item.checked
