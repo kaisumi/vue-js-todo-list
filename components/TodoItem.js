@@ -16,7 +16,7 @@ app.component('todo-item', {
   template:
   /*html*/
   `{{ todo_item.key_index }} {{ todo_item.checked }}
-  <input type="checkbox" :value="this.todo_item.checked" :v-model="this.todo_item.checked" @change="clickCheckbox">
+  <input type="checkbox" :checked="this.todo_item.checked" @change="clickCheckbox">
   <input type="text" :value="this.todo_item.content" :v-model="this.todo_item.content" @change="changeContent">
   <input type="button" value="x" v-on:click="deleteItem">`,
   methods: {
