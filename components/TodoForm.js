@@ -20,15 +20,15 @@ app.component('todo-form', {
       let index = 0
       if (!isNaN(parseInt(storage_index))) index = parseInt(storage_index)
       let todo_item = {
-        key_index: index + 1,
+        key_index: index,
         checked: this.checked,
         content: this.content
       }
-      localStorage.setItem('todo_index', todo_item.key_index)
+      localStorage.setItem('todo_index', todo_item.key_index + 1)
       localStorage.setItem(`checked${todo_item.key_index}`, this.checked)
       localStorage.setItem(`content${todo_item.key_index}`, this.content)
       this.$emit('todo-submitted', todo_item)
-      console.log(`index: ${localStorage.getItem('todo_index')}, ${localStorage.getItem(`content${todo_item.key_index}`)}`)
+      console.log(`index: ${todo_item.key_index}, ${localStorage.getItem(`content${todo_item.key_index}`)}`)
 
       this.checked = false
       this.content = ''

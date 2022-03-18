@@ -24,7 +24,7 @@ app.component('todo-list', {
         checked: false
       }
       const count = parseInt(localStorage.getItem('todo_index'))
-      for (let k = 0; k < count; k++) {
+      for (let k = 0; k <= count; k++) {
         data_array.push(Object.assign({}, data_object))
       }
       let count_effectives = 0
@@ -35,14 +35,14 @@ app.component('todo-list', {
           case /content(\d+)/.test(keys[i]):
             count_effectives++
             j = parseInt(keys[i].replace(/content(\d+)/, '$1'))
-            data_array[j - 1].content = localStorage.getItem(`content${j}`)
-            data_array[j - 1].key_index = j
-            // console.log(`j: ${j}, content: ${data_array[j-1].content}`)
+            data_array[j].content = localStorage.getItem(`content${j}`)
+            data_array[j].key_index = j
+            // console.log(`j: ${j}, content: ${data_array[j].content}`)
             break
           case /checked(\d+)/.test(keys[i]):
             j = parseInt(keys[i].replace(/checked(\d+)/, '$1'))
-            data_array[j - 1].cheched = localStorage.getItem(`checked${j}`)
-            // console.log(`j: ${j}, content: ${data_array[j-1].content}`)
+            data_array[j].checked = (localStorage.getItem(`checked${j}`) === 'true')
+            console.log(`j: ${j}, checked: ${data_array[j].checked}`)
             break
         }
       }
