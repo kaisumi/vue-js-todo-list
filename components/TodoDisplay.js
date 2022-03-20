@@ -11,12 +11,12 @@ app.component('todo-display', {
     <todo-list :todoItems="todoItems"></todo-list>
   </div>`,
   methods: {
-    addTodoItem(todo) {
-      this.todoItems.push(todo)
+    addTodoItem(todoItem) {
+      this.todoItems.push(todoItem)
 
-      localStorage.setItem('todoIndex', todo.keyIndex + 1)
-      localStorage.setItem(`checked${todo.keyIndex}`, todo.checked)
-      localStorage.setItem(`content${todo.keyIndex}`, todo.content)
+      localStorage.setItem('todoIndex', todoItem.keyIndex + 1)
+      localStorage.setItem(`checked${todoItem.keyIndex}`, todoItem.checked)
+      localStorage.setItem(`content${todoItem.keyIndex}`, todoItem.content)
     }
   }
 })
