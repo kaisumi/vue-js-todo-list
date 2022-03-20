@@ -21,6 +21,21 @@ app.component('todo-list', {
       </li>
     </ul>
   </div>`,
+  methods: {
+    emptyDataArray(){
+      const dataArray = []
+      const dataObject = {
+        content: '',
+        keyIndex: 0,
+        checked: false
+      }
+      const count = parseInt(localStorage.getItem('todoIndex'))
+      for (let k = 0; k <= count; k++) {
+        dataArray.push(Object.assign({}, dataObject))
+      }
+      return dataArray
+    },
+  },
   computed: {
     resetLocalStorage: function() {
       localStorage.clear()
@@ -34,16 +49,7 @@ app.component('todo-list', {
     },
     loaded: function() {
       const keys = Object.keys(localStorage)
-      const dataArray = []
-      const dataObject = {
-        content: '',
-        keyIndex: 0,
-        checked: false
-      }
-      const count = parseInt(localStorage.getItem('todoIndex'))
-      for (let k = 0; k <= count; k++) {
-        dataArray.push(Object.assign({}, dataObject))
-      }
+      const dataArray = this.emptyDataArray()
       let countEffectives = 0
       let i
       for (i = 0; i < keys.length; i++) {
