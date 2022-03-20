@@ -22,6 +22,16 @@ app.component('todo-list', {
     </ul>
   </div>`,
   computed: {
+    resetLocalStorage: function() {
+      localStorage.clear()
+      for (i = 0; i < this.todo_items.length; i++) {
+        localStorage.setItem(`content${i}`, this.todo_items[i].content)
+        localStorage.setItem(`checked${i}`, this.todo_items[i].checked)
+        this.todo_items[i].key_index = i
+      }
+      localStorage.setItem('todo_index', this.todo_items.length)
+      return true
+    },
     loaded: function() {
       const keys = Object.keys(localStorage)
       const data_array = []
@@ -56,6 +66,7 @@ app.component('todo-list', {
           if (data_array[i].content !== '') this.todo_items.push(data_array[i])
         }
       }
+      this.resetLocalStorage
       return true
     }
   }
