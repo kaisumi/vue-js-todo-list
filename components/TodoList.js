@@ -6,7 +6,7 @@ app.component('todo-list', {
     }
   },
   template:
-  /*html*/
+  /* html */
   `<div class="todo-item-container">
     <ul v-if="$_loaded">
       <li
@@ -22,7 +22,7 @@ app.component('todo-list', {
     </ul>
   </div>`,
   methods: {
-    $_emptyDataArray(){
+    $_emptyDataArray () {
       const dataArray = []
       const dataObject = {
         content: '',
@@ -34,11 +34,12 @@ app.component('todo-list', {
         dataArray.push(Object.assign({}, dataObject))
       }
       return dataArray
-    },
+    }
   },
   computed: {
-    $_resetLocalStorage: function() {
+    $_resetLocalStorage: function () {
       localStorage.clear()
+      let i
       for (i = 0; i < this.todoItems.length; i++) {
         localStorage.setItem(`content${i}`, this.todoItems[i].content)
         localStorage.setItem(`checked${i}`, this.todoItems[i].checked)
@@ -47,14 +48,14 @@ app.component('todo-list', {
       localStorage.setItem('todoIndex', this.todoItems.length)
       return true
     },
-    $_loaded: function() {
+    $_loaded: function () {
       const keys = Object.keys(localStorage)
       const dataArray = this.$_emptyDataArray()
       let countEffectives = 0
       let i
       for (i = 0; i < keys.length; i++) {
         let j = 0
-        switch(true) {
+        switch (true) {
           case /content(\d+)/.test(keys[i]):
             countEffectives++
             j = parseInt(keys[i].replace(/content(\d+)/, '$1'))
@@ -72,8 +73,7 @@ app.component('todo-list', {
           if (dataArray[i].content !== '') this.todoItems.push(dataArray[i])
         }
       }
-      this.$_resetLocalStorage
-      return true
+      return this.$_resetLocalStorage
     }
   }
 })

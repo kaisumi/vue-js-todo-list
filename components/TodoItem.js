@@ -14,7 +14,7 @@ app.component('todo-item', {
     }
   },
   template:
-  /*html*/
+  /* html */
   `<input
     type="checkbox"
     :checked="this.todoItem.checked"
@@ -31,16 +31,16 @@ app.component('todo-item', {
     @click="$_deleteItem"
   >`,
   methods: {
-    $_clickCheckbox(){
+    $_clickCheckbox () {
       this.todoItem.checked = !this.todoItem.checked
       localStorage.setItem(`checked${String(this.todoItem.keyIndex)}`, this.todoItem.checked)
     },
-    $_deleteItem() {
+    $_deleteItem () {
       this.todoItems.splice(this.index, 1)
       localStorage.removeItem(`content${this.todoItem.keyIndex}`)
       localStorage.removeItem(`checked${this.todoItem.keyIndex}`)
     },
-    $_changeContent() {
+    $_changeContent () {
       localStorage.setItem(`content${this.todoItem.keyIndex}`, this.todoItem.content)
     }
   }

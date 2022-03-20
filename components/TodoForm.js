@@ -1,6 +1,6 @@
 app.component('todo-form', {
   template:
-  /*html*/
+  /* html */
   `<form
     class="todo-form"
     @submit.prevent="$_onSubmit"
@@ -16,7 +16,7 @@ app.component('todo-form', {
       v-model="content"
     >
   </form>`,
-  data() {
+  data () {
     return {
       keyIndex: '',
       checked: false,
@@ -24,13 +24,13 @@ app.component('todo-form', {
     }
   },
   methods: {
-    $_onSubmit() {
+    $_onSubmit () {
       if (this.content === '') return
 
       const storageIndex = localStorage.getItem('todoIndex')
       let index = 0
       if (!isNaN(parseInt(storageIndex))) index = parseInt(storageIndex)
-      let todoItem = {
+      const todoItem = {
         keyIndex: index,
         checked: this.checked,
         content: this.content

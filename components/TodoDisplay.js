@@ -1,17 +1,17 @@
 app.component('todo-display', {
-  data(){
+  data () {
     return {
       todoItems: []
     }
   },
   template:
-  /*html*/
+  /* html */
   `<div class="todo-display">
     <todo-form @todo-submitted="$_addTodoItem"></todo-form>
     <todo-list :todoItems="todoItems"></todo-list>
   </div>`,
   methods: {
-    $_addTodoItem(todoItem) {
+    $_addTodoItem (todoItem) {
       this.todoItems.push(todoItem)
 
       localStorage.setItem('todoIndex', todoItem.keyIndex + 1)
