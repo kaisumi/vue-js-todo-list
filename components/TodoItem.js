@@ -1,10 +1,10 @@
 app.component('todo-item', {
   props: {
-    todo_item: {
+    todoItem: {
       type: Object,
       required: true
     },
-    todo_items: {
+    todoItems: {
       type: Array,
       required: true
     },
@@ -17,12 +17,12 @@ app.component('todo-item', {
   /*html*/
   `<input
     type="checkbox"
-    :checked="this.todo_item.checked"
+    :checked="this.todoItem.checked"
     @change="clickCheckbox"
   >
   <input
     type="text"
-    v-model="this.todo_item.content"
+    v-model="this.todoItem.content"
     @change="changeContent"
   >
   <input
@@ -32,16 +32,16 @@ app.component('todo-item', {
   >`,
   methods: {
     clickCheckbox(){
-      this.todo_item.checked = !this.todo_item.checked
-      localStorage.setItem(`checked${String(this.todo_item.key_index)}`, this.todo_item.checked)
+      this.todoItem.checked = !this.todoItem.checked
+      localStorage.setItem(`checked${String(this.todoItem.keyIndex)}`, this.todoItem.checked)
     },
     deleteItem() {
-      this.todo_items.splice(this.index, 1)
-      localStorage.removeItem(`content${this.todo_item.key_index}`)
-      localStorage.removeItem(`checked${this.todo_item.key_index}`)
+      this.todoItems.splice(this.index, 1)
+      localStorage.removeItem(`content${this.todoItem.keyIndex}`)
+      localStorage.removeItem(`checked${this.todoItem.keyIndex}`)
     },
     changeContent() {
-      localStorage.setItem(`content${this.todo_item.key_index}`, this.todo_item.content)
+      localStorage.setItem(`content${this.todoItem.keyIndex}`, this.todoItem.content)
     }
   }
 })

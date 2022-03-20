@@ -18,7 +18,7 @@ app.component('todo-form', {
   </form>`,
   data() {
     return {
-      key_index: '',
+      keyIndex: '',
       checked: false,
       content: ''
     }
@@ -27,15 +27,15 @@ app.component('todo-form', {
     onSubmit() {
       if (this.content === '') return
 
-      const storage_index = localStorage.getItem('todo_index')
+      const storageIndex = localStorage.getItem('todoIndex')
       let index = 0
-      if (!isNaN(parseInt(storage_index))) index = parseInt(storage_index)
-      let todo_item = {
-        key_index: index,
+      if (!isNaN(parseInt(storageIndex))) index = parseInt(storageIndex)
+      let todoItem = {
+        keyIndex: index,
         checked: this.checked,
         content: this.content
       }
-      this.$emit('todo-submitted', todo_item)
+      this.$emit('todo-submitted', todoItem)
 
       this.checked = false
       this.content = ''

@@ -1,6 +1,6 @@
 app.component('todo-list', {
   props: {
-    todo_items: {
+    todoItems: {
       type: Array,
       required: true
     }
@@ -10,12 +10,12 @@ app.component('todo-list', {
   `<div class="todo-item-container">
     <ul v-if="loaded">
       <li
-        v-for="(todo_item, index) in todo_items"
+        v-for="(todoItem, index) in todoItems"
         :key="index"
       >
         <todo-item
-          :todo_items="this.todo_items"
-          :todo_item="todo_item"
+          :todoItems="this.todoItems"
+          :todoItem="todoItem"
           :index="index"
         ></todo-item>
       </li>
@@ -24,46 +24,46 @@ app.component('todo-list', {
   computed: {
     resetLocalStorage: function() {
       localStorage.clear()
-      for (i = 0; i < this.todo_items.length; i++) {
-        localStorage.setItem(`content${i}`, this.todo_items[i].content)
-        localStorage.setItem(`checked${i}`, this.todo_items[i].checked)
-        this.todo_items[i].key_index = i
+      for (i = 0; i < this.todoItems.length; i++) {
+        localStorage.setItem(`content${i}`, this.todoItems[i].content)
+        localStorage.setItem(`checked${i}`, this.todoItems[i].checked)
+        this.todoItems[i].keyIndex = i
       }
-      localStorage.setItem('todo_index', this.todo_items.length)
+      localStorage.setItem('todoIndex', this.todoItems.length)
       return true
     },
     loaded: function() {
       const keys = Object.keys(localStorage)
-      const data_array = []
-      const data_object = {
+      const dataArray = []
+      const dataObject = {
         content: '',
-        key_index: 0,
+        keyIndex: 0,
         checked: false
       }
-      const count = parseInt(localStorage.getItem('todo_index'))
+      const count = parseInt(localStorage.getItem('todoIndex'))
       for (let k = 0; k <= count; k++) {
-        data_array.push(Object.assign({}, data_object))
+        dataArray.push(Object.assign({}, dataObject))
       }
-      let count_effectives = 0
+      let countEffectives = 0
       let i
       for (i = 0; i < keys.length; i++) {
         let j = 0
         switch(true) {
           case /content(\d+)/.test(keys[i]):
-            count_effectives++
+            countEffectives++
             j = parseInt(keys[i].replace(/content(\d+)/, '$1'))
-            data_array[j].content = localStorage.getItem(`content${j}`)
-            data_array[j].key_index = j
+            dataArray[j].content = localStorage.getItem(`content${j}`)
+            dataArray[j].keyIndex = j
             break
           case /checked(\d+)/.test(keys[i]):
             j = parseInt(keys[i].replace(/checked(\d+)/, '$1'))
-            data_array[j].checked = (localStorage.getItem(`checked${j}`) === 'true')
+            dataArray[j].checked = (localStorage.getItem(`checked${j}`) === 'true')
             break
         }
       }
-      if (count_effectives > this.todo_items.length) {
-        for (i = 0; i < data_array.length; i++) {
-          if (data_array[i].content !== '') this.todo_items.push(data_array[i])
+      if (countEffectives > this.todoItems.length) {
+        for (i = 0; i < dataArray.length; i++) {
+          if (dataArray[i].content !== '') this.todoItems.push(dataArray[i])
         }
       }
       this.resetLocalStorage
