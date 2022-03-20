@@ -8,7 +8,7 @@ app.component('todo-list', {
   template:
   /*html*/
   `<div class="todo-item-container">
-    <ul v-if="onLoad()">
+    <ul v-if="loaded">
       <li
         v-for="(todo_item, index) in todo_items"
         :key="index"
@@ -21,8 +21,8 @@ app.component('todo-list', {
       </li>
     </ul>
   </div>`,
-  methods: {
-    onLoad() {
+  computed: {
+    loaded: function() {
       const keys = Object.keys(localStorage)
       const data_array = []
       const data_object = {
