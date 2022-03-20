@@ -3,7 +3,7 @@ app.component('todo-form', {
   /*html*/
   `<form
     class="todo-form"
-    @submit.prevent="onSubmit"
+    @submit.prevent="$_onSubmit"
   >
     <input
       id="checked"
@@ -24,7 +24,7 @@ app.component('todo-form', {
     }
   },
   methods: {
-    onSubmit() {
+    $_onSubmit() {
       if (this.content === '') return
 
       const storageIndex = localStorage.getItem('todoIndex')

@@ -7,11 +7,11 @@ app.component('todo-display', {
   template:
   /*html*/
   `<div class="todo-display">
-    <todo-form @todo-submitted="addTodoItem"></todo-form>
+    <todo-form @todo-submitted="$_addTodoItem"></todo-form>
     <todo-list :todoItems="todoItems"></todo-list>
   </div>`,
   methods: {
-    addTodoItem(todoItem) {
+    $_addTodoItem(todoItem) {
       this.todoItems.push(todoItem)
 
       localStorage.setItem('todoIndex', todoItem.keyIndex + 1)

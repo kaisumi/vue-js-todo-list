@@ -8,7 +8,7 @@ app.component('todo-list', {
   template:
   /*html*/
   `<div class="todo-item-container">
-    <ul v-if="loaded">
+    <ul v-if="$_loaded">
       <li
         v-for="(todoItem, index) in todoItems"
         :key="index"
@@ -22,7 +22,7 @@ app.component('todo-list', {
     </ul>
   </div>`,
   methods: {
-    emptyDataArray(){
+    $_emptyDataArray(){
       const dataArray = []
       const dataObject = {
         content: '',
@@ -37,7 +37,7 @@ app.component('todo-list', {
     },
   },
   computed: {
-    resetLocalStorage: function() {
+    $_resetLocalStorage: function() {
       localStorage.clear()
       for (i = 0; i < this.todoItems.length; i++) {
         localStorage.setItem(`content${i}`, this.todoItems[i].content)
@@ -47,9 +47,9 @@ app.component('todo-list', {
       localStorage.setItem('todoIndex', this.todoItems.length)
       return true
     },
-    loaded: function() {
+    $_loaded: function() {
       const keys = Object.keys(localStorage)
-      const dataArray = this.emptyDataArray()
+      const dataArray = this.$_emptyDataArray()
       let countEffectives = 0
       let i
       for (i = 0; i < keys.length; i++) {
@@ -72,7 +72,7 @@ app.component('todo-list', {
           if (dataArray[i].content !== '') this.todoItems.push(dataArray[i])
         }
       }
-      this.resetLocalStorage
+      this.$_resetLocalStorage
       return true
     }
   }
