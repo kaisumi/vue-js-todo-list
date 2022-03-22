@@ -43,21 +43,21 @@ app.component('todo-list', {
       return dataArray
     },
     $_pushData (countEffectives, dataArray) {
+      if (countEffectives <= this.todoItems.length) return
+
       const todoItems = []
-      if (countEffectives > this.todoItems.length) {
-        let i
-        for (i = 0; i < dataArray.length; i++) {
-          if (dataArray[i].content !== '') todoItems.push(dataArray[i])
-        }
-        localStorage.clear()
-        for (i = 0; i < todoItems.length; i++) {
-          localStorage.setItem(`content${i}`, todoItems[i].content)
-          localStorage.setItem(`checked${i}`, todoItems[i].checked)
-          todoItems[i].keyIndex = i
-        }
-        localStorage.setItem('todoIndex', i + 1)
-        this.$emit('set-items', todoItems)
+      let i
+      for (i = 0; i < dataArray.length; i++) {
+        if (dataArray[i].content !== '') todoItems.push(dataArray[i])
       }
+      localStorage.clear()
+      for (i = 0; i < todoItems.length; i++) {
+        localStorage.setItem(`content${i}`, todoItems[i].content)
+        localStorage.setItem(`checked${i}`, todoItems[i].checked)
+        todoItems[i].keyIndex = i
+      }
+      localStorage.setItem('todoIndex', i + 1)
+      this.$emit('set-items', todoItems)
     },
     $_checkItem (todoItem) {
       this.$emit('check-item', todoItem)

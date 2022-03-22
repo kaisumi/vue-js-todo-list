@@ -8,7 +8,12 @@ app.component('todo-display', {
   /* html */
   `<div class="todo-display">
     <todo-form @todo-submitted="$_addTodoItem"></todo-form>
-    <todo-list @set-items="$_setTodoItems" @check-item="$_checkItem" @delete-item="$_deleteItem" :todoItems="this.todoItems"></todo-list>
+    <todo-list
+      @set-items="$_setTodoItems"
+      @check-item="$_checkItem"
+      @delete-item="$_deleteItem"
+      :todoItems="this.todoItems"
+    ></todo-list>
   </div>`,
   methods: {
     $_addTodoItem (todoItem) {
