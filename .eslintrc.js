@@ -1,4 +1,7 @@
 module.exports = {
+  globals: {
+    app: true
+  },
   env: {
     browser: true,
     es2021: true
@@ -8,8 +11,7 @@ module.exports = {
     'standard'
   ],
   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module'
+    ecmaVersion: 'latest'
   },
   plugins: [
     'vue'
