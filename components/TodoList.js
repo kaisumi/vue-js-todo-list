@@ -42,6 +42,16 @@ app.component('todo-list', {
       }
       return dataArray
     },
+    $_resetLocalStorage (todoItems) {
+      localStorage.clear()
+      let i
+      for (i = 0; i < todoItems.length; i++) {
+        localStorage.setItem(`content${i}`, todoItems[i].content)
+        localStorage.setItem(`checked${i}`, todoItems[i].checked)
+        todoItems[i].keyIndex = i
+      }
+      localStorage.setItem('todoIndex', i + 1)
+    },
     $_pushData (countEffectives, dataArray) {
       if (countEffectives <= this.todoItems.length) return
 
@@ -50,13 +60,7 @@ app.component('todo-list', {
       for (i = 0; i < dataArray.length; i++) {
         if (dataArray[i].content !== '') todoItems.push(dataArray[i])
       }
-      localStorage.clear()
-      for (i = 0; i < todoItems.length; i++) {
-        localStorage.setItem(`content${i}`, todoItems[i].content)
-        localStorage.setItem(`checked${i}`, todoItems[i].checked)
-        todoItems[i].keyIndex = i
-      }
-      localStorage.setItem('todoIndex', i + 1)
+      this.$_resetLocalStorage(todoItems)
       this.$emit('set-items', todoItems)
     },
     $_checkItem (todoItem) {
