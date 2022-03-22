@@ -5,10 +5,15 @@ app.component('todo-list', {
       required: true
     }
   },
+  emits: [
+    'set-items',
+    'check-item',
+    'delete-item'
+  ],
   template:
   /* html */
   `<div class="todo-item-container">
-    <ul v-if="$_loaded">
+    <ul v-if="$_loadData">
       <li
         v-for="(todoItem, index) in todoItems"
         :key="index"
@@ -17,6 +22,8 @@ app.component('todo-list', {
           :todoItems="this.todoItems"
           :todoItem="todoItem"
           :index="index"
+          @check-item="$_checkItem"
+          @delete-item="$_deleteItem"
         ></todo-item>
       </li>
     </ul>
@@ -34,21 +41,33 @@ app.component('todo-list', {
         dataArray.push(Object.assign({}, dataObject))
       }
       return dataArray
+    },
+    $_pushData (countEffectives, dataArray) {
+      const todoItems = []
+      if (countEffectives > this.todoItems.length) {
+        let i
+        for (i = 0; i < dataArray.length; i++) {
+          if (dataArray[i].content !== '') todoItems.push(dataArray[i])
+        }
+        localStorage.clear()
+        for (i = 0; i < todoItems.length; i++) {
+          localStorage.setItem(`content${i}`, todoItems[i].content)
+          localStorage.setItem(`checked${i}`, todoItems[i].checked)
+          todoItems[i].keyIndex = i
+        }
+        localStorage.setItem('todoIndex', i + 1)
+        this.$emit('set-items', todoItems)
+      }
+    },
+    $_checkItem (todoItem) {
+      this.$emit('check-item', todoItem)
+    },
+    $_deleteItem (todoItem) {
+      this.$emit('delete-item', todoItem)
     }
   },
   computed: {
-    $_resetLocalStorage: function () {
-      localStorage.clear()
-      let i
-      for (i = 0; i < this.todoItems.length; i++) {
-        localStorage.setItem(`content${i}`, this.todoItems[i].content)
-        localStorage.setItem(`checked${i}`, this.todoItems[i].checked)
-        this.todoItems[i].keyIndex = i
-      }
-      localStorage.setItem('todoIndex', this.todoItems.length)
-      return true
-    },
-    $_loaded: function () {
+    $_loadData: function () {
       const keys = Object.keys(localStorage)
       const dataArray = this.$_emptyDataArray()
       let countEffectives = 0
@@ -68,12 +87,8 @@ app.component('todo-list', {
             break
         }
       }
-      if (countEffectives > this.todoItems.length) {
-        for (i = 0; i < dataArray.length; i++) {
-          if (dataArray[i].content !== '') this.todoItems.push(dataArray[i])
-        }
-      }
-      return this.$_resetLocalStorage
+      this.$_pushData(countEffectives, dataArray)
+      return true
     }
   }
 })

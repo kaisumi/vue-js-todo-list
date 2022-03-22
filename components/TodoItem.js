@@ -13,6 +13,10 @@ app.component('todo-item', {
       required: true
     }
   },
+  emits: [
+    'check-item',
+    'delete-item'
+  ],
   template:
   /* html */
   `<input
@@ -32,13 +36,10 @@ app.component('todo-item', {
   >`,
   methods: {
     $_clickCheckbox () {
-      this.todoItem.checked = !this.todoItem.checked
-      localStorage.setItem(`checked${String(this.todoItem.keyIndex)}`, this.todoItem.checked)
+      this.$emit('check-item', this.todoItem)
     },
     $_deleteItem () {
-      this.todoItems.splice(this.index, 1)
-      localStorage.removeItem(`content${this.todoItem.keyIndex}`)
-      localStorage.removeItem(`checked${this.todoItem.keyIndex}`)
+      this.$emit('delete-item', this.todoItem)
     },
     $_changeContent () {
       localStorage.setItem(`content${this.todoItem.keyIndex}`, this.todoItem.content)
