@@ -12,28 +12,40 @@ app.component('todo-display', {
       @set-items="$_setTodoItems"
       @check-item="$_checkItem"
       @delete-item="$_deleteItem"
+      @update-item="$_updateItem"
       :todoItems="this.todoItems"
     ></todo-list>
   </div>`,
   methods: {
     $_addTodoItem (todoItem) {
       this.todoItems.push(todoItem)
-
-      localStorage.setItem('todoIndex', todoItem.keyIndex + 1)
-      localStorage.setItem(`checked${todoItem.keyIndex}`, todoItem.checked)
-      localStorage.setItem(`content${todoItem.keyIndex}`, todoItem.content)
+      setData(this.todoItems)
     },
     $_setTodoItems (todoItems) {
       this.todoItems = todoItems
+      setData(this.todoItems)
     },
-    $_checkItem (todoItem) {
-      this.todoItems[todoItem.keyIndex].checked = !this.todoItems[todoItem.keyIndex].checked
-      localStorage.setItem(`checked${String(todoItem.keyIndex)}`, this.todoItems[todoItem.keyIndex].checked)
+    $_checkItem (index) {
+      this.todoItems[index].checked = !this.todoItems[index].checked
+      setData(this.todoItems)
     },
-    $_deleteItem (todoItem) {
-      this.todoItems.splice(todoItem.keyIndex, 1)
-      localStorage.removeItem(`content${todoItem.keyIndex}`)
-      localStorage.removeItem(`checked${todoItem.keyIndex}`)
+    $_deleteItem (index) {
+      this.todoItems.splice(index, 1)
+      setData(this.todoItems)
+    },
+    $_updateItem (index, content) {
+      this.todoItems[index].content = content
+      setData(this.todoItems)
     }
+  },
+  mounted () {
+    this.todoItems = getData()
   }
 })
+function setData (data) {
+  localStorage.setItem('data', JSON.stringify(data))
+}
+function getData () {
+  const data = JSON.parse(localStorage.getItem('data'))
+  return data === null ? [] : data
+}

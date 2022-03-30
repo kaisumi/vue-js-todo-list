@@ -15,7 +15,8 @@ app.component('todo-item', {
   },
   emits: [
     'check-item',
-    'delete-item'
+    'delete-item',
+    'update-item'
   ],
   template:
   /* html */
@@ -36,13 +37,13 @@ app.component('todo-item', {
   >`,
   methods: {
     $_clickCheckbox () {
-      this.$emit('check-item', this.todoItem)
+      this.$emit('check-item', this.index)
     },
     $_deleteItem () {
-      this.$emit('delete-item', this.todoItem)
+      this.$emit('delete-item', this.index)
     },
     $_changeContent () {
-      localStorage.setItem(`content${this.todoItem.keyIndex}`, this.todoItem.content)
+      this.$emit('update-item', this.index, this.todoItem.content)
     }
   }
 })
