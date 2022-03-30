@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<head>
+  <title>Todo List with Vue.js</title>
+  <script src="https://unpkg.com/vue@next"></script>
+</head>
+<body>
+  <h1>ToDo List</h1>
+  <div id="app">
+    <todo-display></todo-display>
+  </div>
+  <script src="./main.js"></script>
+  <script src="./components/TodoDisplay.js"></script>
+  <script src="./components/TodoForm.js"></script>
+  <script src="./components/TodoItem.js"></script>
+  <script src="./components/TodoList.js"></script>
+  <script>
+    const mountedApp = app.mount('#app')
+  </script>
+</body>
